@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types';
-import React, { useState } from 'react';
 import classnames from 'classnames';
-import './styles.css'
+import PropTypes from 'prop-types';
+import React from 'react';
+import './styles.css';
 
 TodoList.propTypes = {
     courses: PropTypes.array,
