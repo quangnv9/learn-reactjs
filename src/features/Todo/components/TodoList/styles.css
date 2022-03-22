@@ -1,0 +1,8 @@
+.course-item.completed {
+    font-style: italic;
+    color: #ccc;
+    text-decoration: line-through;
+}
+.course-item {
+    cursor: pointer;
+}
