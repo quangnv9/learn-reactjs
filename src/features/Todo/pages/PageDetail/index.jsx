@@ -1,10 +1,10 @@
-import queryString from 'query-string';
 import React, { useEffect, useState } from 'react';
-import { useHistory, useLocation, useRouteMatch } from 'react-router-dom';
-import TodoForm from './components/TodoForm';
-import TodoList from './components/TodoList/index';
+import { useLocation, useHistory, useRouteMatch } from 'react-router-dom';
+import TodoList from '../../components/TodoList/index';
+import queryString from 'query-string'
 
 function PageDetail() {
+
 
 
     const initCourses = [
@@ -83,25 +83,11 @@ function PageDetail() {
             search: queryString.stringify(queryParams)
         })
     }
+
     const renderedCourses = courses.filter(course => filteredStatus === 'all' || filteredStatus === course.status)
-
-
-    const handleTodoFormSubmit = (values) => {
-        console.log('Values: ', values);
-        const newCourse= {
-            id: courses.length + 1,
-            name: values.title,
-            status: 'new'
-        }
-        const newCourses = [...courses, newCourse]
-        setCourses(newCourses)
-    }
 
     return (
         <div>
-            <h1>What to do?</h1>
-            <TodoForm onSubmit={handleTodoFormSubmit}/>
-
             <h1>Todo</h1>
             <TodoList courses={renderedCourses} onCourseClick={handleCourseClick} />
             <button onClick={handleShowAllClick}>Show All</button>
@@ -112,3 +98,27 @@ function PageDetail() {
 }
 
 export default PageDetail;
+
+// import React from 'react';
+// import { Route, Switch, useRouteMatch } from 'react-router-dom';
+// import ListPage from './pages/ListPage';
+// import PageDetail from './pages/PageDetail';
+// import NotFound from '../../components/NotFound'
+
+
+// function TodoFeature() {
+
+//     const match = useRouteMatch();
+
+//     return (
+//         <div>
+//             <Switch>
+//                 <Route path={match.path} component={PageDetail} />
+//                 <Route path={`${match.path}/:todoId`} component={ListPage} />
+//                 <Route component={NotFound} />
+//             </Switch>
+//         </div >
+//     );
+// }
+
+// export default TodoFeature;

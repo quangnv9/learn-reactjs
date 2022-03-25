@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import './styles.css';
+import './styles.scss';
 
 TodoList.propTypes = {
     courses: PropTypes.array,
