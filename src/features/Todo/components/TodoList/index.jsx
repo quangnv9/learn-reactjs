@@ -37,7 +37,6 @@ function TodoList({ courses, onCourseClick }) {
                 ))
                 }
             </ul >
-
         </>
 
     );

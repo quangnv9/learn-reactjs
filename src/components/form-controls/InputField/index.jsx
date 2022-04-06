@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { TextField } from '@mui/material';
-import {Controller} from 'react-hook-form'
+import { Controller } from 'react-hook-form'
 
 InputField.propTypes = {
     form: PropTypes.object.isRequired,
@@ -13,9 +13,9 @@ InputField.propTypes = {
 
 function InputField(props) {
 
-    const {form, name, label, disabled} = props;
-    const {errors, formState} = form;
-    const hasErrors = errors[name] && formState.touched[name]
+    const { form, name, label, disabled } = props;
+    const { errors } = form;
+    const hasErrors = errors[name]
 
     return (
         <Controller
@@ -29,7 +29,8 @@ function InputField(props) {
 
             error={!!hasErrors}
             helperText={errors[name]?.message}
-            variant="filled"
+            variant="outlined"
+            margin='normal'
         />
     );
 }

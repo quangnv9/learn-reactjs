@@ -1,5 +1,6 @@
 import queryString from 'query-string';
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useHistory, useLocation, useRouteMatch } from 'react-router-dom';
 import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList/index';
@@ -88,7 +89,7 @@ function PageDetail() {
 
     const handleTodoFormSubmit = (values) => {
         console.log('Values: ', values);
-        const newCourse= {
+        const newCourse = {
             id: courses.length + 1,
             name: values.title,
             status: 'new'
@@ -100,13 +101,14 @@ function PageDetail() {
     return (
         <div>
             <h1>What to do?</h1>
-            <TodoForm onSubmit={handleTodoFormSubmit}/>
+            <TodoForm onSubmit={handleTodoFormSubmit} />
 
             <h1>Todo</h1>
             <TodoList courses={renderedCourses} onCourseClick={handleCourseClick} />
             <button onClick={handleShowAllClick}>Show All</button>
             <button onClick={handleShowCompletedClick}>Show Completed</button>
             <button onClick={handleShowNewClick}>Show New</button>
+
         </div>
     );
 }
