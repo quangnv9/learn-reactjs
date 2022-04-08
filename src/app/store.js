@@ -1,17 +1,16 @@
-import { configureStore } from "@reduxjs/toolkit";
-import counterRedecer from "features/Counter/counterSlice"
-import userRedecer from 'features/Auth/userSlice'
-import todoRedecer from "features/Todo/todoSlice"
+import counterReducer from 'features/Counter/counterSlice'
+import userReducer from 'features/Auth/userSlice'
+
+const { configureStore } = require('@reduxjs/toolkit');
 
 
-const rootRudecer = {
-    counter: counterRedecer,
-    user: userRedecer,
-    todos: todoRedecer,
+const rootReducer = {
+    counter: counterReducer,
+    user: userReducer,
 }
 
 const store = configureStore({
-    reducer: rootRudecer,
+    reducer: rootReducer,
 })
 
 export default store
