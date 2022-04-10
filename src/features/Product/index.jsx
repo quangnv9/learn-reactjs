@@ -1,29 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import productApi from '../../api/productApi';
-import ProductList from './components/ProductList'
+import { Box } from '@mui/material';
+import React from 'react';
+import { useRouteMatch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom/cjs/react-router-dom.min';
+import ListPage from './pages/ListPage';
 
 
 function ProductFeature() {
+  const match = useRouteMatch();
 
-    const [products, setProducts] = useState([])
-
-    useEffect(() => {
-        const params = {
-          _limit: 10
-        }
-        const fetchProducts = async () => {
-          const productList = await productApi.getAll(params);
-          console.log(productList);
-          setProducts(productList)
-        }
-        fetchProducts();
-      }, [])
-
-    return (
-        <div>
-            <ProductList products={products} />
-        </div>
-    );
+  return (
+    <Box pt={4}>
+      <Switch>
+        <Route path={match.url} exact component={ListPage} />
+      </Switch>
+    </Box>
+  );
 }
 
 export default ProductFeature;
