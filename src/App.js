@@ -1,7 +1,5 @@
-import { Button } from '@mui/material';
 import Header from 'components/Header';
 import CounterFeature from 'features/Counter';
-import { useSnackbar } from 'notistack';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import './App.scss';
 import NotFound from './components/NotFound';
@@ -10,9 +8,6 @@ import ProductFeature from './features/Product';
 import TodoFeature from './features/Todo';
 
 function App() {
-
-  const { enqueueSnackbar } = useSnackbar()
-
 
   return (
     <div className="app">
