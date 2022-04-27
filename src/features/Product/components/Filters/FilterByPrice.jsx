@@ -34,7 +34,6 @@ function FilterByPrice({ onChange }) {
     });
 
     const handleChange = (e) => {
-        console.log(e.target);
         const { name, value } = e.target
         setValues(prevValues => ({
             ...prevValues,

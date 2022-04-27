@@ -1,8 +1,8 @@
 import Header from 'components/Header';
+import CartFeature from 'features/Cart';
 import CounterFeature from 'features/Counter';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import './App.scss';
-import NotFound from './components/NotFound';
 import AlbumFeature from './features/Album';
 import ProductFeature from './features/Product';
 import TodoFeature from './features/Todo';
@@ -12,21 +12,14 @@ function App() {
   return (
     <div className="app">
       <Header />
-
       <Switch>
-        <Redirect from="/home" to="/todos" />
-        <Redirect from="/post-list/:postId" to="/posts/:postId" />
-
         <Route path="/" component={CounterFeature} exact />
-        <Route path="/products" component={ProductFeature} exact />
-        <Route path="/todos" component={TodoFeature} exact />
-        <Route path="/albums" component={AlbumFeature} exact />
-
-        <Route component={NotFound} />
+        <Route path="/products" component={ProductFeature} />
+        <Route path="/todos" component={TodoFeature} />
+        <Route path="/albums" component={AlbumFeature} />
+        <Route path="/cart" component={CartFeature} />
       </Switch>
-
       {/* <ProductFeature /> */}
-      <h1>Footer</h1>
     </div>
   );
 }

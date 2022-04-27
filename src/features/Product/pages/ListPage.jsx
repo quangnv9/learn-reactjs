@@ -1,13 +1,16 @@
 import { Box, Container, Grid, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useEffect } from 'react'
+import queryString from 'query-string'
 import productApi from 'api/productApi'
 import ProductSkeletonLisst from '../components/ProductSkeletonLisst';
 import ProductList from '../components/ProductList';
 import { Pagination } from '@material-ui/lab';
 import ProductSort from '../components/ProductSort';
 import ProductFilters from '../components/ProductFilters';
+import { useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 
 const useStyles = makeStyles(theme => ({
@@ -31,32 +34,57 @@ const useStyles = makeStyles(theme => ({
 function ListPage(props) {
     const classes = useStyles()
     const [productList, setProductList] = useState([])
+
+    const history = useHistory()
+    const location = useLocation()
+    const queryParams = useMemo(() => {
+        const params = queryString.parse(location.search)
+        return ({
+            ...params,
+            _page: Number.parseInt(params._page) || 1,
+            _limit: Number.parseInt(params._limit) || 12,
+            _sort: params._sort || 'salePrice:ASC',
+            isPromotion: params.isPromotion === 'true',
+            isFreeShip: params.isFreeShip === 'true'
+        })
+    }, [location.search])
+
     const [pagination, setPagination] = useState({
         limit: 12,
         total: 10,
         page: 1,
     })
     const [loading, setLoading] = useState(true)
-    const [filters, setFilters] = useState({
-        _page: 1,
-        _limit: 12,
-        _sort: 'salePrice:ASC'
-    })
+
+    // const [filters, setFilters] = useState(() => ({
+    //     ...queryParams,
+    //     _page: Number.parseInt(queryParams._page) || 1,
+    //     _limit: Number.parseInt(queryParams._limit) || 12,
+    //     _sort: queryParams._sort || 'salePrice:ASC'
+    // }))
+
+    // useEffect(() => {
+    //     history.push({
+    //         pathname: history.location.pathname,
+    //         search: queryString.stringify(filters)
+    //     })
+    // }, [filters])
 
     useEffect(() => {
         (async () => {
 
-            if (filters.salePrice_gte === 0 && filters.salePrice_lte === 0) {
-                delete filters.salePrice_gte
-                delete filters.salePrice_lte
+            if (Number.parseInt(queryParams.salePrice_gte) === 0 && Number.parseInt(queryParams.salePrice_lte) === 0) {
+                delete queryParams.salePrice_gte
+                delete queryParams.salePrice_lte
             }
-            if (!filters.isPromotion) {
-                delete filters.isPromotion
-            } if (!filters.isFreeShip) {
-                delete filters.isFreeShip
+            if (!queryParams.isPromotion) {
+                delete queryParams.isPromotion
+            }
+            if (!queryParams.isFreeShip) {
+                delete queryParams.isFreeShip
             }
             try {
-                const { data, pagination } = await productApi.getAll(filters)
+                const { data, pagination } = await productApi.getAll(queryParams)
                 setProductList(data)
                 setPagination(pagination)
             } catch (error) {
@@ -64,27 +92,60 @@ function ListPage(props) {
             }
             setLoading(false);
         })();
-    }, [filters])
+    }, [queryParams])
 
     const handlePageChange = (e, page) => {
-        setFilters((prevFilters) => ({
-            ...prevFilters,
-            _page: page
-        }))
+        // setFilters((prevFilters) => ({
+        //     ...prevFilters,
+        //     _page: page
+        // }))
+
+        const filters = {
+            ...queryParams,
+            _page: page,
+        }
+
+        history.push({
+            pathname: history.location.pathname,
+            search: queryString.stringify(filters)
+        })
     }
     const handleSortChange = (newValue) => {
-        setFilters((prevFilters) => ({
-            ...prevFilters,
+        // setFilters((prevFilters) => ({
+        //     ...prevFilters,
+        //     _page: 1,
+        //     _sort: newValue
+        // }))
+
+        const filters = {
+            ...queryParams,
             _page: 1,
             _sort: newValue
-        }))
+        }
+
+        history.push({
+            pathname: history.location.pathname,
+            search: queryString.stringify(filters)
+        })
+
     }
     const handleFiltersChange = (newFilters) => {
-        setFilters((prevFilters) => ({
-            ...prevFilters,
+        // setFilters((prevFilters) => ({
+        //     ...prevFilters,
+        //     _page: 1,
+        //     ...newFilters
+        // }))
+
+        const filters = {
+            ...queryParams,
             _page: 1,
-            ...newFilters
-        }))
+            ...newFilters,
+        }
+
+        history.push({
+            pathname: history.location.pathname,
+            search: queryString.stringify(filters)
+        })
     }
     return (
         <Box>
@@ -93,7 +154,7 @@ function ListPage(props) {
                     <Grid item className={classes.left}>
                         <Paper elevation={0}>
                             <ProductFilters
-                                filters={filters}
+                                filters={queryParams}
                                 onChange={handleFiltersChange}
                             />
                         </Paper>
@@ -101,7 +162,7 @@ function ListPage(props) {
 
                     <Grid item className={classes.right}>
                         <Paper elevation={0}>
-                            <ProductSort onChange={handleSortChange} currentSort={filters._sort} />
+                            <ProductSort onChange={handleSortChange} currentSort={queryParams._sort} />
                             {loading
                                 ? <ProductSkeletonLisst />
                                 : <ProductList productList={productList}>product list</ProductList>

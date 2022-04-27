@@ -21,16 +21,24 @@ function InputField(props) {
         <Controller
             name={name}
             control={form.control}
-            as={TextField}
 
-            fullWidth
-            label={label}
-            disabled={disabled}
+            render={({ onChange, onBlur, value, name }) => (
+                <TextField
+                    fullWidth
+                    label={label}
+                    disabled={disabled}
 
-            error={!!hasErrors}
-            helperText={errors[name]?.message}
-            variant="outlined"
-            margin='normal'
+                    error={!!hasErrors}
+                    helperText={errors[name]?.message}
+                    variant="outlined"
+                    margin='normal'
+
+                    value={value}
+                    name={name}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                />
+            )}
         />
     );
 }
