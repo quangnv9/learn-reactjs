@@ -97,7 +97,7 @@ export default function Header() {
                     <CodeIcon className={classes.menuButton} fontSize="large" />
                     <Typography className={classes.title} component="div">
                         <Link className={classes.link} to="/">
-                            F8 Shop
+                            Quang Store
                         </Link>
                     </Typography>
 
