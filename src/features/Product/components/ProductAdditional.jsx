@@ -1,15 +1,9 @@
 import React from 'react';
 
-ProductAdditional.propTypes = {
-
-};
+ProductAdditional.propTypes = {};
 
 function ProductAdditional(props) {
-    return (
-        <div>
-            Additional
-        </div>
-    );
+    return <div>Additional</div>;
 }
 
 export default ProductAdditional;

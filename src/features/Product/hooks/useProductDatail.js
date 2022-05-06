@@ -1,23 +1,22 @@
-import { useEffect, useState } from "react";
-import productApi from 'api/productApi'
+import { useEffect, useState } from 'react';
+import productApi from 'api/productApi';
 
 export default function useProductDatail(productId) {
-    const [product, setProduct] = useState({})
-    const [loading, setLoading] = useState(true)
+    const [product, setProduct] = useState({});
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         (async () => {
             try {
-                setLoading(true)
-                const result = await productApi.get(productId)
-                setProduct(result)
+                setLoading(true);
+                const result = await productApi.get(productId);
+                setProduct(result);
             } catch (error) {
                 console.log('Failse to fetch product', error);
             }
-            setLoading(false)
-        })()
-    }, [productId])
+            setLoading(false);
+        })();
+    }, [productId]);
 
-    return { product, loading }
+    return { product, loading };
 }
-

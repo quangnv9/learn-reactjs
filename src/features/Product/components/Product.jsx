@@ -9,33 +9,26 @@ Product.propTypes = {
     product: PropTypes.object,
 };
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         '& > img:hover': {
-            cursor: 'pointer'
-        }
+            cursor: 'pointer',
+        },
     },
-
-}))
+}));
 
 function Product({ product = {} }) {
+    const classes = useStyles();
+    const history = useHistory();
 
-    const classes = useStyles()
-    const history = useHistory()
-
-    const thumbnailUrl = product.thumbnail
-        ? `${STATIC_HOST}${product.thumbnail?.url}` : THUMBNAIL_PLACEHOLDER
+    const thumbnailUrl = product.thumbnail ? `${STATIC_HOST}${product.thumbnail?.url}` : THUMBNAIL_PLACEHOLDER;
 
     const handleClick = () => {
-        history.push(`/products/${product.id}`)
-    }
+        history.push(`/products/${product.id}`);
+    };
     return (
-        <Box padding={1} minHeight='215px' onClick={handleClick} className={classes.root}>
-            <img
-                src={thumbnailUrl}
-                alt={product.name}
-                width='100%'
-            />
+        <Box padding={1} minHeight="215px" onClick={handleClick} className={classes.root}>
+            <img src={thumbnailUrl} alt={product.name} width="100%" />
             <Typography variant="body2">{product.name}</Typography>
             <Typography variant="body2">
                 <Box component="span" fontSize="16px" fontWeight="bold" mr={1}>

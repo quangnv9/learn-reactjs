@@ -10,7 +10,7 @@ FilterByCategory.propTypes = {
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        padding: theme.spacing(2)
+        padding: theme.spacing(2),
     },
 
     menu: {
@@ -24,33 +24,31 @@ const useStyles = makeStyles((theme) => ({
             '&:hover': {
                 cursor: 'pointer',
                 color: theme.palette.primary.dark,
-            }
-        }
-    }
-}))
-
+            },
+        },
+    },
+}));
 
 function FilterByCategory({ onChange }) {
-
     const [categoryList, setCategoryList] = useState([]);
     const classes = useStyles();
 
     useEffect(() => {
         (async () => {
             try {
-                const response = await categoryApi.getAll()
-                setCategoryList(response)
+                const response = await categoryApi.getAll();
+                setCategoryList(response);
             } catch (error) {
                 console.log('Failed to fetch category list', error);
             }
-        })()
-    }, [])
+        })();
+    }, []);
 
     const handleCategoryClick = (category) => {
         if (onChange) {
-            onChange(category.id)
+            onChange(category.id);
         }
-    }
+    };
 
     return (
         <Box className={classes.root}>

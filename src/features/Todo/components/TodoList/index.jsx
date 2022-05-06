@@ -5,20 +5,19 @@ import './styles.scss';
 
 TodoList.propTypes = {
     courses: PropTypes.array,
-    onCourseClick: PropTypes.func
+    onCourseClick: PropTypes.func,
 };
 TodoList.defaultProps = {
     courses: [],
-    onCourseClick: null
-}
+    onCourseClick: null,
+};
 
 function TodoList({ courses, onCourseClick }) {
-
     const handleCourseClick = (course, index) => {
         if (!onCourseClick) return;
 
-        onCourseClick(course, index)
-    }
+        onCourseClick(course, index);
+    };
 
     return (
         <>
@@ -27,18 +26,16 @@ function TodoList({ courses, onCourseClick }) {
                     <li
                         className={classnames({
                             'course-item': true,
-                            completed: course.status === 'completed'
+                            completed: course.status === 'completed',
                         })}
                         key={course.id}
                         onClick={() => handleCourseClick(course, index)}
                     >
                         {course.name}
                     </li>
-                ))
-                }
-            </ul >
+                ))}
+            </ul>
         </>
-
     );
 }
 

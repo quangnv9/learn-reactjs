@@ -2,11 +2,9 @@ import { Box, Link, makeStyles } from '@material-ui/core';
 import React from 'react';
 import { NavLink, useRouteMatch } from 'react-router-dom';
 
-ProductMenu.propTypes = {
+ProductMenu.propTypes = {};
 
-};
-
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         justifyContent: 'center',
@@ -16,21 +14,19 @@ const useStyles = makeStyles(theme => ({
 
         '& > li': {
             padding: theme.spacing(2, 4),
-
         },
         '& > li > a': {
             color: theme.palette.grey[700],
-            fontSize: "24px"
+            fontSize: '24px',
         },
         '& > li > a.active': {
             color: theme.palette.primary.main,
-            textDecoration: 'underline'
-        }
+            textDecoration: 'underline',
+        },
     },
-}))
+}));
 
 function ProductMenu(props) {
-
     const classes = useStyles();
 
     const { url } = useRouteMatch();

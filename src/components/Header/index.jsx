@@ -19,8 +19,6 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, useHistory } from 'react-router-dom';
 
-
-
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
@@ -42,27 +40,26 @@ const useStyles = makeStyles((theme) => ({
         color: theme.palette.grey[500],
         padding: theme.spacing(1),
         zIndex: 1,
-    }
-}))
+    },
+}));
 
 const MODE = {
     REGISTER: 'register',
     LOGIN: 'login',
-}
+};
 
 export default function Header() {
-
     const [open, setOpen] = useState(false);
     const [mode, setMode] = useState(MODE.LOGIN);
-    const dispatch = useDispatch()
-    const history = useHistory()
+    const dispatch = useDispatch();
+    const history = useHistory();
 
-    const cartItemCount = useSelector(cartItemsCountSelector)
+    const cartItemCount = useSelector(cartItemsCountSelector);
 
-    const loggedInUser = useSelector(state => state.user.currentUser);
+    const loggedInUser = useSelector((state) => state.user.currentUser);
     const isLoggedIn = !!loggedInUser.id;
     const [anchorEl, setAnchorEl] = useState(null);
-    const popoverOpen = Boolean(anchorEl)
+    const popoverOpen = Boolean(anchorEl);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -73,25 +70,25 @@ export default function Header() {
     };
 
     const handleUserClick = (event) => {
-        event.preventDefault()
+        event.preventDefault();
         setAnchorEl(event.currentTarget);
-    }
+    };
 
     const handleCloseMenu = () => {
         setAnchorEl(null);
-    }
+    };
 
     const handleLogout = () => {
         const action = logout();
         dispatch(action);
         setAnchorEl(null);
-    }
+    };
 
     const handClickCartIcon = () => {
-        history.push('/cart')
-    }
+        history.push('/cart');
+    };
 
-    const classes = useStyles()
+    const classes = useStyles();
 
     return (
         <div className={classes.root}>
@@ -99,7 +96,9 @@ export default function Header() {
                 <Toolbar>
                     <CodeIcon className={classes.menuButton} fontSize="large" />
                     <Typography className={classes.title} component="div">
-                        <Link className={classes.link} to="/">F8 Shop</Link>
+                        <Link className={classes.link} to="/">
+                            F8 Shop
+                        </Link>
                     </Typography>
 
                     <NavLink className={classes.link} to="/todos">
@@ -127,11 +126,8 @@ export default function Header() {
                     </IconButton>
 
                     {isLoggedIn && (
-                        <IconButton
-                            onClick={handleUserClick}
-                            color="inherit"
-                        >
-                            <AccountCircle ></AccountCircle>
+                        <IconButton onClick={handleUserClick} color="inherit">
+                            <AccountCircle></AccountCircle>
                         </IconButton>
                     )}
                 </Toolbar>
@@ -153,11 +149,7 @@ export default function Header() {
                 <MenuItem onClick={handleCloseMenu}>Profile</MenuItem>
                 <MenuItem onClick={handleLogout}>Log Out</MenuItem>
             </Menu>
-            <Dialog
-                disableEscapeKeyDown
-                open={open}
-                onClose={handleClose}
-            >
+            <Dialog disableEscapeKeyDown open={open} onClose={handleClose}>
                 <IconButton className={classes.closeBtn} onClick={handleClose}>
                     <Close />
                 </IconButton>
@@ -182,10 +174,8 @@ export default function Header() {
                             </Box>
                         </>
                     )}
-
                 </DialogContent>
             </Dialog>
         </div>
-
     );
 }

@@ -11,27 +11,25 @@ Login.propTypes = {
 };
 
 function Login(props) {
-
     const { closeDialog } = props;
 
-    const dispatch = useDispatch()
-    const { enqueueSnackbar } = useSnackbar()
+    const dispatch = useDispatch();
+    const { enqueueSnackbar } = useSnackbar();
 
     const handleSubmit = async (values) => {
         try {
-            const action = login(values)
+            const action = login(values);
             const resultAction = await dispatch(action);
-            const user = unwrapResult(resultAction)
+            const user = unwrapResult(resultAction);
 
             if (closeDialog) {
                 closeDialog();
             }
-        }
-        catch (err) {
+        } catch (err) {
             console.log(err);
-            enqueueSnackbar(err.message, { variant: 'error' })
+            enqueueSnackbar(err.message, { variant: 'error' });
         }
-    }
+    };
     return (
         <div>
             <LoginForm onSubmit={handleSubmit} />

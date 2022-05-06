@@ -8,7 +8,7 @@ ProductList.propTypes = {
 };
 ProductList.defaultProps = {
     productList: [],
-}
+};
 
 function ProductList({ productList }) {
     return (

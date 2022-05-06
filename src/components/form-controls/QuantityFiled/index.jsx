@@ -17,23 +17,20 @@ QuantityField.propTypes = {
     disabled: PropTypes.bool,
 };
 
-const useStyles = makeStyles((theme => ({
-    root: {
-
-    },
+const useStyles = makeStyles((theme) => ({
+    root: {},
     box: {
         display: 'flex',
         maxWidth: '200px',
-    }
-})))
+    },
+}));
 
 function QuantityField(props) {
-
     const classes = useStyles();
 
     const { form, name, label, disabled } = props;
     const { errors, setValue } = form;
-    const hasErrors = errors[name]
+    const hasErrors = errors[name];
 
     return (
         <FormControl error={!!hasErrors} fullWidth margin="normal" variant="outlined" size="small">
@@ -43,20 +40,17 @@ function QuantityField(props) {
                 control={form.control}
                 render={({ onChange, onBlur, value, name }) => (
                     <Box className={classes.box}>
-                        <IconButton onClick={() => setValue(name, Number.parseInt(value) ? Number.parseInt(value) - 1 : 1)}>
+                        <IconButton
+                            onClick={() => setValue(name, Number.parseInt(value) ? Number.parseInt(value) - 1 : 1)}
+                        >
                             <RemoveCircleOutline />
                         </IconButton>
                         <OutlinedInput
                             id={name}
-
                             type="number"
                             endAdornment={
                                 <InputAdornment position="end">
-                                    <IconButton
-                                        aria-label="toggle password visibility"
-                                        edge="end"
-                                    >
-                                    </IconButton>
+                                    <IconButton aria-label="toggle password visibility" edge="end"></IconButton>
                                 </InputAdornment>
                             }
                             value={value}
@@ -64,15 +58,13 @@ function QuantityField(props) {
                             onChange={onChange}
                             onBlur={onBlur}
                         />
-                        <IconButton onClick={() => setValue(name, Number.parseInt(value) ? Number.parseInt(value) + 1 : 1)}>
+                        <IconButton
+                            onClick={() => setValue(name, Number.parseInt(value) ? Number.parseInt(value) + 1 : 1)}
+                        >
                             <AddCircleOutline />
                         </IconButton>
                     </Box>
-
                 )}
-
-
-
             />
             <FormHelperText error={!!hasErrors}>{errors[name]?.message}</FormHelperText>
         </FormControl>

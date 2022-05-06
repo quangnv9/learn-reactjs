@@ -2,24 +2,21 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { decrease, increase } from './counterSlice';
 
-CounterFeature.propTypes = {
-
-};
+CounterFeature.propTypes = {};
 
 function CounterFeature(props) {
-
-    const dispatch = useDispatch()
-    const counter = useSelector(state => state.counter)
+    const dispatch = useDispatch();
+    const counter = useSelector((state) => state.counter);
 
     const handleIncrease = () => {
-        const action = increase()
-        dispatch(action)
-    }
+        const action = increase();
+        dispatch(action);
+    };
 
     const handleDecrease = () => {
-        const action = decrease()
-        dispatch(action)
-    }
+        const action = decrease();
+        dispatch(action);
+    };
 
     return (
         <div>

@@ -1,8 +1,6 @@
 import React from 'react';
 
-ListTodo.propTypes = {
-
-};
+ListTodo.propTypes = {};
 
 function ListTodo() {
     return (

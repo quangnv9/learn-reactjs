@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 const useStyle = makeStyles((theme) => ({
     root: {
         borderTop: `1px solid ${theme.palette.grey[300]}`,
-        padding: theme.spacing(2)
+        padding: theme.spacing(2),
     },
 
     range: {
@@ -16,16 +16,15 @@ const useStyle = makeStyles((theme) => ({
         '&>span': {
             marginLeft: theme.spacing(1),
             marginRight: theme.spacing(1),
-        }
-    }
-}))
+        },
+    },
+}));
 
 FilterByPrice.propTypes = {
     onChange: PropTypes.func,
 };
 
 function FilterByPrice({ onChange }) {
-
     const classes = useStyle();
 
     const [values, setValues] = useState({
@@ -34,20 +33,20 @@ function FilterByPrice({ onChange }) {
     });
 
     const handleChange = (e) => {
-        const { name, value } = e.target
-        setValues(prevValues => ({
+        const { name, value } = e.target;
+        setValues((prevValues) => ({
             ...prevValues,
-            [name]: value
-        }))
-    }
+            [name]: value,
+        }));
+    };
 
     const handleSubmit = () => {
-        if (onChange) onChange(values)
+        if (onChange) onChange(values);
         setValues({
             salePrice_gte: 0,
             salePrice_lte: 0,
-        })
-    }
+        });
+    };
 
     return (
         <Box className={classes.root}>
@@ -73,7 +72,9 @@ function FilterByPrice({ onChange }) {
                 />
             </Box>
 
-            <Button variant="outlined" color="primary" size="small" onClick={handleSubmit}>Áp Dụng</Button>
+            <Button variant="outlined" color="primary" size="small" onClick={handleSubmit}>
+                Áp Dụng
+            </Button>
         </Box>
     );
 }

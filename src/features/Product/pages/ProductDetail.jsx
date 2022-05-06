@@ -13,44 +13,41 @@ import ProductReviews from '../components/ProductReviews';
 import ProductThumbnail from '../components/ProductThumbnail';
 import useProductDatail from '../hooks/useProductDatail';
 
-ProductDetail.propTypes = {
+ProductDetail.propTypes = {};
 
-};
-
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     root: {},
 
     left: {
         width: '400px',
         padding: theme.spacing(1.5),
-        borderRight: `3px solid ${theme.palette.grey[300]} `
+        borderRight: `3px solid ${theme.palette.grey[300]} `,
     },
     right: {
         flex: '1 1 0',
-        padding: theme.spacing(1.5)
+        padding: theme.spacing(1.5),
     },
     loading: {
         position: 'fixed',
         top: 0,
         left: 0,
-        width: '100%'
-    }
-}))
+        width: '100%',
+    },
+}));
 
 function ProductDetail() {
+    const dispatch = useDispatch();
+    const classes = useStyles();
+    const { path } = useRouteMatch();
+    const { productId } = useParams();
 
-    const dispatch = useDispatch()
-    const classes = useStyles()
-    const { path } = useRouteMatch()
-    const { productId } = useParams()
-
-    const { product, loading } = useProductDatail(productId)
+    const { product, loading } = useProductDatail(productId);
     if (loading) {
         return (
             <Box className={classes.loading}>
                 <LinearProgress></LinearProgress>
             </Box>
-        )
+        );
     }
 
     const handleAddToCartSubmit = (formValues) => {
@@ -60,15 +57,16 @@ function ProductDetail() {
         //     quantity: formValues.quantity,
         // });
         // console.log(action);
-        dispatch(addToCart({
-            id: product.id,
-            product,
-            quantity: formValues.quantity,
-        }));
-    }
+        dispatch(
+            addToCart({
+                id: product.id,
+                product,
+                quantity: formValues.quantity,
+            }),
+        );
+    };
 
     return (
-
         <Box className={classes.root}>
             <Container>
                 <Paper elevation={0}>
@@ -88,10 +86,10 @@ function ProductDetail() {
                     <Route path={path} exact>
                         <ProductDescription product={product} />
                     </Route>
-                    <Route path={`${path}/additional`} >
+                    <Route path={`${path}/additional`}>
                         <ProductAdditional />
                     </Route>
-                    <Route path={`${path}/reviews`} >
+                    <Route path={`${path}/reviews`}>
                         <ProductReviews />
                     </Route>
                 </Switch>

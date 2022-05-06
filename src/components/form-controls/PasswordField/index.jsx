@@ -19,15 +19,14 @@ PasswordField.propTypes = {
 };
 
 function PasswordField(props) {
-
     const { form, name, label, disabled } = props;
     const { errors } = form;
-    const hasErrors = errors[name]
-    const [showPassword, setShowPassword] = useState(true)
+    const hasErrors = errors[name];
+    const [showPassword, setShowPassword] = useState(true);
 
     const toggleShowPassword = () => {
-        setShowPassword(!showPassword)
-    }
+        setShowPassword(!showPassword);
+    };
 
     return (
         <FormControl error={!!hasErrors} fullWidth margin="normal" variant="outlined">
@@ -38,7 +37,6 @@ function PasswordField(props) {
                 render={({ onChange, onBlur, value, name }) => (
                     <OutlinedInput
                         id={name}
-
                         type={showPassword ? 'password' : 'text'}
                         endAdornment={
                             <InputAdornment position="end">
@@ -58,9 +56,6 @@ function PasswordField(props) {
                         onBlur={onBlur}
                     />
                 )}
-
-
-
             />
             <FormHelperText error={!!hasErrors}>{errors[name]?.message}</FormHelperText>
         </FormControl>

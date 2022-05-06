@@ -1,6 +1,6 @@
 const StorageKeys = {
     USER: 'user',
-    TOKEN: 'accsess_token'
-}
+    TOKEN: 'accsess_token',
+};
 
-export default StorageKeys
+export default StorageKeys;

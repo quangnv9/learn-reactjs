@@ -8,20 +8,19 @@ import ProductFeature from './features/Product';
 import TodoFeature from './features/Todo';
 
 function App() {
-
-  return (
-    <div className="app">
-      <Header />
-      <Switch>
-        <Route path="/" component={CounterFeature} exact />
-        <Route path="/products" component={ProductFeature} />
-        <Route path="/todos" component={TodoFeature} />
-        <Route path="/albums" component={AlbumFeature} />
-        <Route path="/cart" component={CartFeature} />
-      </Switch>
-      {/* <ProductFeature /> */}
-    </div>
-  );
+    return (
+        <div className="app">
+            <Header />
+            <Switch>
+                <Route path="/" component={CounterFeature} exact />
+                <Route path="/products" component={ProductFeature} />
+                <Route path="/todos" component={TodoFeature} />
+                <Route path="/albums" component={AlbumFeature} />
+                <Route path="/cart" component={CartFeature} />
+            </Switch>
+            {/* <ProductFeature /> */}
+        </div>
+    );
 }
 
 export default App;

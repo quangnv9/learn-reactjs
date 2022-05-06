@@ -1,15 +1,9 @@
 import React from 'react';
 
-ProductReviews.propTypes = {
-
-};
+ProductReviews.propTypes = {};
 
 function ProductReviews(props) {
-    return (
-        <div>
-            Reviews
-        </div>
-    );
+    return <div>Reviews</div>;
 }
 
 export default ProductReviews;

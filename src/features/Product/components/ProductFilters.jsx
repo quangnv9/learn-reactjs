@@ -10,24 +10,23 @@ ProductFilters.propTypes = {
     onChange: PropTypes.func,
 };
 ProductFilters.defaultProps = {
-    filters: {}
-}
+    filters: {},
+};
 
 function ProductFilters({ filters, onChange }) {
-
     const handleCategoryChange = (newCategoryId) => {
         if (!onChange) return;
 
         const newFilters = {
             ...filters,
-            "category.id": newCategoryId
+            'category.id': newCategoryId,
         };
-        onChange(newFilters)
-    }
+        onChange(newFilters);
+    };
 
     const handleChange = (values) => {
-        if (onChange) onChange(values)
-    }
+        if (onChange) onChange(values);
+    };
 
     return (
         <Box>
