@@ -6,7 +6,6 @@ import ProductDetail from './pages/ProductDetail';
 
 function ProductFeature() {
     const match = useRouteMatch();
-
     return (
         <Box pt={4}>
             <Switch>

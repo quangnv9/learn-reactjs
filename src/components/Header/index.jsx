@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
         color: 'white',
     },
     closeBtn: {
-        position: 'absolute' + '!important',
+        position: 'absolute !important',
         top: theme.spacing(1),
         right: theme.spacing(1),
         color: theme.palette.grey[500],
