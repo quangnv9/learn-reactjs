@@ -20,9 +20,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1,
-    },
+    root: {},
     menuButton: {
         marginRight: theme.spacing(2),
     },
